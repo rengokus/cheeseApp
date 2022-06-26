@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import project.cheeseapp.entity.*;
+import project.cheeseapp.model.*;
 import project.cheeseapp.repository.RoomRepository;
 
 import java.time.LocalDate;
@@ -43,6 +43,10 @@ public class RoomService {
 
     public List<Room> getRoomsOfUser(AppUser user) {
         return user.getRooms();
+    }
+
+    public List<Room> getAllRooms() {
+        return roomRepo.findAll();
     }
 
     public void deleteRoom(Room room) {

@@ -1,4 +1,4 @@
-package project.cheeseapp.entity;
+package project.cheeseapp.model;
 
 public enum CheeseType {
     SOFT,

@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import project.cheeseapp.entity.AppUser;
-import project.cheeseapp.entity.Role;
-import project.cheeseapp.entity.Room;
+import project.cheeseapp.model.AppUser;
+import project.cheeseapp.model.Role;
+import project.cheeseapp.model.Room;
 import project.cheeseapp.repository.AppUserRepository;
 
 @Service

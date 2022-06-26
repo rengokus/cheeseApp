@@ -2,18 +2,23 @@ package project.cheeseapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import project.cheeseapp.entity.AppUser;
-import project.cheeseapp.entity.Room;
+import project.cheeseapp.configuration.security.AppUserDetails;
+import project.cheeseapp.controller.request.RoomAddRequest;
+import project.cheeseapp.model.AppUser;
+import project.cheeseapp.model.Room;
 import project.cheeseapp.service.AppUserService;
 import project.cheeseapp.service.RoomService;
 
+import java.security.Principal;
 import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping("/user/room")
+@RequestMapping("/room")
 public class RoomController {
 
     @Autowired
@@ -40,12 +45,23 @@ public class RoomController {
     }
 
     @PostMapping("/add")
-    public Room addRoom() {
-        AppUser user = appUserService.getCurrentUser();
-        if (user == null) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
-        }
-        Room room = new Room();
-        return roomService.addRoom(user, room);
+    public Room addRoom(@RequestBody RoomAddRequest request) {
+
+        Room room = new Room(
+                request.getShelvesCount(),
+                request.getShelvesWidth(),
+                request.getShelvesLength(),
+                appUserService.getCurrentUser()
+        );
+
+        return roomService.saveRoom(room);
+//        AppUser user = appUserService.getCurrentUser();
+//        if (user == null) {
+//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+//        }
+//        Room room = new Room();
+//        return roomService.addRoom(user, room);
     }
+
+
 }

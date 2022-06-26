@@ -3,7 +3,7 @@ package project.cheeseapp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import project.cheeseapp.controller.request.MethodUpdateRequest;
-import project.cheeseapp.entity.RipeMethod;
+import project.cheeseapp.model.RipeMethod;
 import project.cheeseapp.service.RipeMethodService;
 
 @CrossOrigin

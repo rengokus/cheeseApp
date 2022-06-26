@@ -1,4 +1,4 @@
-package project.cheeseapp.configuration;
+package project.cheeseapp.configuration.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,4 +1,4 @@
-package project.cheeseapp.configuration.jwt;
+package project.cheeseapp.configuration.security.jwt;
 
 import io.jsonwebtoken.*;
 import lombok.extern.java.Log;

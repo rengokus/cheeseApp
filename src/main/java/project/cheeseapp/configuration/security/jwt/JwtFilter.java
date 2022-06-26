@@ -1,4 +1,4 @@
-package project.cheeseapp.configuration.jwt;
+package project.cheeseapp.configuration.security.jwt;
 
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -6,8 +6,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
-import project.cheeseapp.configuration.AppUserDetails;
-import project.cheeseapp.configuration.AppUserDetailsService;
+import project.cheeseapp.configuration.security.AppUserDetails;
+import project.cheeseapp.configuration.security.AppUserDetailsService;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;

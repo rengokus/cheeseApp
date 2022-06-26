@@ -1,7 +1,7 @@
 package project.cheeseapp.controller.request;
 
 import lombok.Data;
-import project.cheeseapp.entity.CheeseType;
+import project.cheeseapp.model.CheeseType;
 
 @Data
 public class CheeseUpdateRequest {

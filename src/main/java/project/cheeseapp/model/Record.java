@@ -1,9 +1,7 @@
-package project.cheeseapp.entity;
+package project.cheeseapp.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -11,6 +9,7 @@ import java.time.LocalDate;
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name = "records")
 public class Record {
 
     @Id
@@ -21,6 +20,10 @@ public class Record {
     private LocalDate minRipeningDate;
     private LocalDate maxRipeningDate;
     private boolean isRipe;
+
+    @ManyToOne
+    @JoinColumn(name = "room_id", nullable = false)
+    private Room room;
 
     @OneToOne
     @JoinColumn(name = "cheese_id")

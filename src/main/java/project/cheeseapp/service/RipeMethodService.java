@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import project.cheeseapp.controller.request.CheeseAddRequest;
 import project.cheeseapp.controller.request.MethodUpdateRequest;
-import project.cheeseapp.entity.RipeMethod;
+import project.cheeseapp.model.RipeMethod;
 import project.cheeseapp.repository.RipeMethodRepository;
 
 import java.util.Optional;

@@ -1,10 +1,10 @@
-package project.cheeseapp.configuration;
+package project.cheeseapp.configuration.security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-import project.cheeseapp.entity.AppUser;
+import project.cheeseapp.model.AppUser;
 
 import java.util.Collection;
 import java.util.Collections;

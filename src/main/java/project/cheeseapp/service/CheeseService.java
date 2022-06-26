@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 import project.cheeseapp.controller.request.CheeseAddRequest;
 import project.cheeseapp.controller.request.CheeseUpdateRequest;
-import project.cheeseapp.entity.Cheese;
-import project.cheeseapp.entity.RipeMethod;
+import project.cheeseapp.model.Cheese;
+import project.cheeseapp.model.RipeMethod;
 import project.cheeseapp.repository.CheeseRepository;
 
 import java.util.ArrayList;

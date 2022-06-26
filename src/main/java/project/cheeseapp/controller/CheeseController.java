@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import project.cheeseapp.controller.request.CheeseAddRequest;
 import project.cheeseapp.controller.request.CheeseUpdateRequest;
-import project.cheeseapp.entity.Cheese;
-import project.cheeseapp.entity.RipeMethod;
+import project.cheeseapp.model.Cheese;
+import project.cheeseapp.model.RipeMethod;
 import project.cheeseapp.service.CheeseService;
 import project.cheeseapp.service.RipeMethodService;
 

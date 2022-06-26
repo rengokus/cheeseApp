@@ -5,12 +5,12 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import project.cheeseapp.configuration.jwt.JwtProvider;
+import project.cheeseapp.configuration.security.jwt.JwtProvider;
 import project.cheeseapp.controller.request.AuthRequest;
 import project.cheeseapp.controller.request.RegistrationRequest;
 import project.cheeseapp.controller.response.AuthResponse;
-import project.cheeseapp.entity.AppUser;
-import project.cheeseapp.entity.Role;
+import project.cheeseapp.model.AppUser;
+import project.cheeseapp.model.Role;
 import project.cheeseapp.service.AppUserService;
 
 @CrossOrigin

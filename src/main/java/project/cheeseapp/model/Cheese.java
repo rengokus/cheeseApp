@@ -1,4 +1,4 @@
-package project.cheeseapp.entity;
+package project.cheeseapp.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,6 +8,7 @@ import javax.persistence.*;
 @Entity
 @Data
 @NoArgsConstructor
+@Table(name = "cheeses")
 public class Cheese {
 
     @Id

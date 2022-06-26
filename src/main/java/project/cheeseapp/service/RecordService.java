@@ -4,9 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
-import project.cheeseapp.entity.Cheese;
-import project.cheeseapp.entity.RipeMethod;
-import project.cheeseapp.entity.Record;
+import project.cheeseapp.model.Cheese;
+import project.cheeseapp.model.RipeMethod;
+import project.cheeseapp.model.Record;
 import project.cheeseapp.repository.RecordRepository;
 
 import java.time.LocalDate;

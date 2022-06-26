@@ -1,4 +1,4 @@
-package project.cheeseapp.configuration;
+package project.cheeseapp.configuration.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import project.cheeseapp.configuration.jwt.JwtFilter;
+import project.cheeseapp.configuration.security.jwt.JwtFilter;
 
 @Configuration
 @EnableWebSecurity
