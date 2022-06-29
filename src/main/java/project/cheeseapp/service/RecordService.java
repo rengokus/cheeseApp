@@ -10,6 +10,7 @@ import project.cheeseapp.model.Record;
 import project.cheeseapp.repository.RecordRepository;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,16 +19,20 @@ public class RecordService {
     @Autowired
     private RecordRepository recordRepo;
 
-    public Record createRecord(String name, Cheese cheese) {
-        RipeMethod ripeMethod = cheese.getRipeMethod();
+    public Record createRecord(String name, Cheese cheese, double radius, int count) {
+        RipeMethod method = cheese.getRipeMethod();
+
         Record record = new Record();
         record.setName(name);
         record.setCheese(cheese);
         LocalDate date = LocalDate.now();
         record.setInitialDate(date);
+        record.setLastMaintain(date);
         record.setRipe(false);
-        record.setMinRipeningDate(date.plusDays(ripeMethod.getMinDays()));
-        record.setMaxRipeningDate(date.plusDays(ripeMethod.getMaxDays()));
+        record.setRipeningDate(date.plusDays(method.getRipeningDays()));
+        record.setCount(count);
+        record.setSpaceRequired((Math.pow(radius + 2.25, 2) * Math.PI) * count);
+
         return record;
     }
 
@@ -35,7 +40,12 @@ public class RecordService {
         return recordRepo.save(record);
     }
 
-    public Record findById(Integer id) {
+    public List<Record> checkRipe(List<Record> records) {
+        records.forEach(r -> r.setRipe(!LocalDate.now().isBefore(r.getRipeningDate())));
+        return recordRepo.saveAll(records);
+    }
+
+    public Record getRecordById(Integer id) {
         Optional<Record> record = recordRepo.findById(id);
         if (record.isPresent()) {
             return record.get();

@@ -1,5 +1,6 @@
 package project.cheeseapp.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,15 +21,19 @@ public class Room {
     @Id
     @GeneratedValue
     private Integer id;
-    private int optimalMinTemp;
-    private int optimalMaxTemp;
-    private int optimalMinHum;
-    private int optimalMaxHum;
+    private int minTemp;
+    private int maxTemp;
+    private int minHum;
+    private int maxHum;
+    private int currTemp;
+    private int currHum;
     private int shelvesCount;
-    private int shelfWidth;
-    private int shelfLength;
+    private double shelfWidth;
+    private double shelfLength;
+    private double freeSpace;
 
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "room", orphanRemoval = true)
+    @JsonManagedReference
     private List<Record> records;
 
     @ManyToOne
@@ -36,11 +41,12 @@ public class Room {
     @JsonManagedReference
     private AppUser appUser;
 
-    public Room(int shelvesCount, int shelfWidth, int shelfLength, AppUser appUser) {
+    public Room(int shelvesCount, double shelfWidth, double shelfLength, AppUser appUser) {
         this.shelvesCount = shelvesCount;
         this.shelfWidth = shelfWidth;
         this.shelfLength = shelfLength;
         this.appUser = appUser;
+        this.freeSpace = shelfLength * shelfWidth * shelvesCount;
     }
 
     public void addRecord(Record record) {
@@ -54,7 +60,7 @@ public class Room {
     public void checkRipe() {
         LocalDate dateNow = LocalDate.now();
         for (Record record : records) {
-            record.setRipe(record.getMinRipeningDate().isBefore(dateNow));
+            record.setRipe(record.getRipeningDate().isBefore(dateNow));
         }
         //setRecords(records);
     }

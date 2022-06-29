@@ -22,11 +22,9 @@ public class CheeseController {
 
     @PostMapping("/add")
     public Cheese add(@RequestBody CheeseAddRequest request) {
-        RipeMethod ripeMethod = ripeMethodService.createMethodFromRequest(request);
-        ripeMethodService.saveMethod(ripeMethod);
+        RipeMethod method = ripeMethodService.createMethodFromRequest(request);
         Cheese cheese = cheeseService.createCheeseFromRequest(request);
-        cheese = cheeseService.assignMethod(cheese, ripeMethod);
-        return cheeseService.saveCheese(cheese);
+        return cheeseService.assignMethod(cheese, method);
     }
 
     @PostMapping("/update")
@@ -34,5 +32,15 @@ public class CheeseController {
         Cheese cheese = cheeseService.findById(id);
         cheese = cheeseService.updateCheeseFromRequest(cheese, request);
         return cheeseService.saveCheese(cheese);
+    }
+
+    @PostMapping("/delete")
+    public String delete(@RequestParam int cheeseId) {
+        try {
+            cheeseService.deleteCheeseById(cheeseId);
+            return "OK";
+        } catch (Exception ex) {
+            return ex.getMessage();
+        }
     }
 }

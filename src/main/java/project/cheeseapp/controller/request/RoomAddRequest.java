@@ -7,6 +7,6 @@ import lombok.Data;
 public class RoomAddRequest {
 
     private int shelvesCount;
-    private int shelvesWidth;
-    private int shelvesLength;
+    private double shelvesWidth;
+    private double shelvesLength;
 }

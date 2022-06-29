@@ -23,13 +23,13 @@ public class RipeMethodService {
 
     public RipeMethod createMethodFromRequest(CheeseAddRequest request) {
         RipeMethod ripeMethod = new RipeMethod();
-        ripeMethod.setMaxDays(request.getMaxDays());
         ripeMethod.setMaxHum(request.getMaxHum());
         ripeMethod.setMaxTemp(request.getMaxTemp());
-        ripeMethod.setMinDays(request.getMinDays());
+        ripeMethod.setRipeningDays(request.getRipeningDays());
         ripeMethod.setMinHum(request.getMinHum());
         ripeMethod.setMinTemp(request.getMinTemp());
-        return ripeMethod;
+        ripeMethod.setMaintainDays(request.getMaintainDays());
+        return methodRepo.save(ripeMethod);
     }
 
     public RipeMethod findById(int id) {
@@ -45,8 +45,7 @@ public class RipeMethodService {
         ripeMethod.setMaxTemp(request.getMaxTemp());
         ripeMethod.setMinHum(request.getMinHum());
         ripeMethod.setMaxHum(request.getMaxHum());
-        ripeMethod.setMinDays(request.getMinDays());
-        ripeMethod.setMaxDays(request.getMaxDays());
+        ripeMethod.setRipeningDays(request.getRipeningDays());
         return ripeMethod;
     }
 }

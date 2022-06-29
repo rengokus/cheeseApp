@@ -41,7 +41,7 @@ public class AdminController {
                 "--format=custom",
                 "--blobs",
                 "--verbose",
-                "--file=" + filePath, "db1"
+                "--file=" + filePath, "coursework"
         );
         try {
             final Map<String, String> env = processBuilder.environment();
@@ -88,7 +88,7 @@ public class AdminController {
                 "--port=5432",
                 "--username=postgres",
                 "--clean",
-                "--dbname=db1",
+                "--dbname=coursework",
                 backup.getPath()
         );
         try {

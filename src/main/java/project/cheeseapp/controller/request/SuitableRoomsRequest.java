@@ -3,11 +3,10 @@ package project.cheeseapp.controller.request;
 import lombok.Data;
 
 @Data
-public class MethodUpdateRequest {
-
+public class SuitableRoomsRequest {
+    private double spaceRequired;
     private int minTemp;
     private int maxTemp;
     private int minHum;
     private int maxHum;
-    private int ripeningDays;
 }

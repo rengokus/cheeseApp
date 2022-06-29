@@ -20,7 +20,7 @@ public class CheeseService {
     @Autowired
     private CheeseRepository cheeseRepo;
 
-    public Cheese findByGrade(String grade) {
+    public Cheese getCheeseByGrade(String grade) {
         Cheese cheese = cheeseRepo.findByGrade(grade);
         if (cheese == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "grade not found");
@@ -64,6 +64,10 @@ public class CheeseService {
 
     public Cheese assignMethod(Cheese cheese, RipeMethod ripeMethod) {
         cheese.setRipeMethod(ripeMethod);
-        return cheese;
+        return cheeseRepo.save(cheese);
+    }
+
+    public void deleteCheeseById(int cheeseId) {
+        cheeseRepo.deleteById(cheeseId);
     }
 }

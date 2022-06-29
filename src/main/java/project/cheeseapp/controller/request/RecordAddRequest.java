@@ -6,4 +6,6 @@ import lombok.Data;
 public class RecordAddRequest {
     private String name;
     private String grade;
+    private int radius;
+    private int count;
 }

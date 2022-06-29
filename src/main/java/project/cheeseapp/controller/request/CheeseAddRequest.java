@@ -16,6 +16,6 @@ public class CheeseAddRequest {
     private int maxTemp;
     private int minHum;
     private int maxHum;
-    private int minDays;
-    private int maxDays;
+    private int ripeningDays;
+    private int maintainDays;
 }
