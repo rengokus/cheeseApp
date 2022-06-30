@@ -45,6 +45,10 @@ public class RecordService {
         return recordRepo.saveAll(records);
     }
 
+    public List<Record> saveRecords(List<Record> records) {
+        return recordRepo.saveAll(records);
+    }
+
     public Record getRecordById(Integer id) {
         Optional<Record> record = recordRepo.findById(id);
         if (record.isPresent()) {

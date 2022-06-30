@@ -8,6 +8,7 @@ import project.cheeseapp.controller.request.SuitableRoomsRequest;
 import project.cheeseapp.model.AppUser;
 import project.cheeseapp.model.Room;
 import project.cheeseapp.service.AppUserService;
+import project.cheeseapp.service.RecordService;
 import project.cheeseapp.service.RoomService;
 
 import java.util.List;
@@ -19,15 +20,30 @@ public class RoomController {
 
     @Autowired
     private RoomService roomService;
+
     @Autowired
     private AppUserService appUserService;
+
+    @Autowired
+    private RecordService recordService;
 
     @GetMapping
     public List<Room> getRooms() {
         AppUser user = appUserService.getCurrentUser();
-        return roomService.getRoomsOfUser(user);
+        List<Room> rooms = roomService.getRoomsOfUser(user);
+        rooms.forEach(r -> {
+            r.checkRipe();
+            recordService.saveRecords(r.getRecords());
+            roomService.saveRoom(r);
+        });
+        return rooms;
 //        rooms.forEach(Room::checkRipe);
 //        return roomService.saveRooms(rooms);
+    }
+
+    @GetMapping("/string")
+    public String getString() {
+        return "string";
     }
 
     @PostMapping("/get")
@@ -60,11 +76,11 @@ public class RoomController {
     }
 
     @PostMapping("/{roomId}")
-    public void setConditions(@PathVariable int roomId, SetRoomConditionsRequest request) {
+    public Room setConditions(@PathVariable int roomId, @RequestBody SetRoomConditionsRequest request) {
         Room room = roomService.getRoomById(roomId);
         room.setCurrHum(request.getHum());
         room.setCurrTemp(request.getTemp());
-        roomService.saveRoom(room);
+        return roomService.saveRoom(room);
     }
 
     @PostMapping("/add")

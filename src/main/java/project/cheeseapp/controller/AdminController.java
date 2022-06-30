@@ -21,7 +21,7 @@ public class AdminController {
     private BackupRepository backupRepo;
 
     @PostMapping("/do")
-    public void backup(@RequestParam String backupName) {
+    public List<Backup> backup(@RequestParam String backupName) {
         Process process;
         ProcessBuilder processBuilder;
         LocalDate dateNow = LocalDate.now();
@@ -66,9 +66,11 @@ public class AdminController {
                 backup.setPath(filePath);
                 backupRepo.save(backup);
             }
+            return backupRepo.findAll();
         } catch (IOException | InterruptedException e) {
             System.out.println(e.getMessage());
         }
+        return backupRepo.findAll();
     }
 
     @GetMapping("/show")

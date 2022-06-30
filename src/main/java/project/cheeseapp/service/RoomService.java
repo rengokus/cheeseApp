@@ -166,10 +166,10 @@ public class RoomService {
     public Room checkRipe(Room room) {
         List<Record> records = room.getRecords();
         LocalDate dateNow = LocalDate.now();
-        for (Record record : records) {
-            record.setRipe(record.getRipeningDate().isBefore(dateNow));
-        }
-//        records.forEach(r -> r.setRipe(r.getMinRipeningDate().isBefore(dateNow)));
+//        for (Record record : records) {
+//            record.setRipe(record.getRipeningDate().isBefore(dateNow));
+//        }
+        records.forEach(r -> r.setRipe(r.getRipeningDate().isBefore(dateNow)));
         room.setRecords(records);
         return room;
     }

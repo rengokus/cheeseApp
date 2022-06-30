@@ -47,6 +47,8 @@ public class Room {
         this.shelfLength = shelfLength;
         this.appUser = appUser;
         this.freeSpace = shelfLength * shelfWidth * shelvesCount;
+        this.currHum = 0;
+        this.currTemp = 0;
     }
 
     public void addRecord(Record record) {
@@ -59,9 +61,10 @@ public class Room {
 
     public void checkRipe() {
         LocalDate dateNow = LocalDate.now();
-        for (Record record : records) {
-            record.setRipe(record.getRipeningDate().isBefore(dateNow));
-        }
+//        for (Record record : records) {
+//            record.setRipe(record.getRipeningDate().isBefore(dateNow));
+//        }
+        records.forEach(r -> r.setRipe(r.getRipeningDate().isBefore(dateNow)));
         //setRecords(records);
     }
 }

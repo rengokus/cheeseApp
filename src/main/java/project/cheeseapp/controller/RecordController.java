@@ -3,6 +3,7 @@ package project.cheeseapp.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import project.cheeseapp.controller.request.RecordAddRequest;
+import project.cheeseapp.controller.response.RecordAddResponse;
 import project.cheeseapp.exception.NoFreeSpaceException;
 import project.cheeseapp.exception.NoIntersectionException;
 import project.cheeseapp.model.Cheese;
@@ -12,6 +13,7 @@ import project.cheeseapp.service.CheeseService;
 import project.cheeseapp.service.RecordService;
 import project.cheeseapp.service.RoomService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @CrossOrigin
@@ -27,7 +29,8 @@ public class RecordController {
     private CheeseService cheeseService;
 
     @PostMapping("/add")
-    public String addRecord(@RequestBody RecordAddRequest request, @PathVariable int roomId) {
+    public RecordAddResponse addRecord(@RequestBody RecordAddRequest request, @PathVariable int roomId) {
+        RecordAddResponse response = new RecordAddResponse();
         Cheese cheese = cheeseService.getCheeseByGrade(request.getGrade());
         Room room = roomService.getRoomById(roomId);
         Record record = recordService.createRecord(
@@ -38,11 +41,15 @@ public class RecordController {
         );
         try {
             roomService.addRecord(record, room);
-            recordService.saveRecord(record);
-            return "OK";
+            response.setRecord(recordService.saveRecord(record));
+            response.setMessage("OK");
+            return response;
         } catch (NoFreeSpaceException | NoIntersectionException ex) {
-            return ex.getMessage();
+            response.setRecord(record);
+            response.setMessage(ex.getMessage());
+            return response;
         }
+
 
 //        roomService.updateConditions(room);
 //        return (List<Room>) recordService.saveRecord(record);
@@ -53,12 +60,20 @@ public class RecordController {
     }
 
     @PostMapping("/delete")
-    public String deleteRecord(@RequestParam int recordId, @PathVariable int roomId) {
+    public Room deleteRecord(@RequestParam int recordId, @PathVariable int roomId) {
         Record record = recordService.getRecordById(recordId);
         Room room = roomService.getRoomById(roomId);
         room = roomService.deleteRecord(record, room);
         recordService.deleteRecord(record);
-        return "OK";
+        return room;
+    }
+
+    @PostMapping("/{recordId}")
+    public Room updateDate(@PathVariable int roomId, @PathVariable int recordId) {
+        Record record = recordService.getRecordById(recordId);
+        record.setLastMaintain(LocalDate.now());
+        recordService.saveRecord(record);
+        return roomService.getRoomById(roomId);
     }
 
     @GetMapping

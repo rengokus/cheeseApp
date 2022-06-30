@@ -70,4 +70,8 @@ public class CheeseService {
     public void deleteCheeseById(int cheeseId) {
         cheeseRepo.deleteById(cheeseId);
     }
+
+    public List<Cheese> getAllCheeses() {
+        return cheeseRepo.findAll();
+    }
 }

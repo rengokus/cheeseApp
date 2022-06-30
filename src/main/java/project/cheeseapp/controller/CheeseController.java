@@ -9,6 +9,8 @@ import project.cheeseapp.model.RipeMethod;
 import project.cheeseapp.service.CheeseService;
 import project.cheeseapp.service.RipeMethodService;
 
+import java.util.List;
+
 @CrossOrigin
 @RestController
 @RequestMapping("/admin/cheese")
@@ -20,11 +22,17 @@ public class CheeseController {
     @Autowired
     private CheeseService cheeseService;
 
+    @GetMapping
+    public List<Cheese> getAllCheeses() {
+        return cheeseService.getAllCheeses();
+    }
+
     @PostMapping("/add")
-    public Cheese add(@RequestBody CheeseAddRequest request) {
+    public List<Cheese> add(@RequestBody CheeseAddRequest request) {
         RipeMethod method = ripeMethodService.createMethodFromRequest(request);
         Cheese cheese = cheeseService.createCheeseFromRequest(request);
-        return cheeseService.assignMethod(cheese, method);
+        cheeseService.assignMethod(cheese, method);
+        return cheeseService.getAllCheeses();
     }
 
     @PostMapping("/update")
