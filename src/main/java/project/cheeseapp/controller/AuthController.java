@@ -34,10 +34,15 @@ public class AuthController {
     @PostMapping("/auth")
     public AuthResponse auth(@RequestBody AuthRequest request) {
         AppUser appUser = appUserService.findByLoginAndPassword(request.getLogin(), request.getPassword());
+        if (appUser == null) {
+            return null;
+        }
         String token = jwtProvider.generateToken(appUser.getLogin());
         if (appUser.getRole() == Role.ROLE_USER)
             return new AuthResponse(token, Role.ROLE_USER);
         else
             return new AuthResponse(token, Role.ROLE_ADMIN);
     }
+
+
 }

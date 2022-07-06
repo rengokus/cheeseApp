@@ -2,6 +2,7 @@ package project.cheeseapp.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 import project.cheeseapp.controller.request.RoomAddRequest;
 import project.cheeseapp.controller.request.SetRoomConditionsRequest;
 import project.cheeseapp.controller.request.SuitableRoomsRequest;
@@ -92,14 +93,7 @@ public class RoomController {
                 request.getShelvesLength(),
                 appUserService.getCurrentUser()
         );
-
         return roomService.saveRoom(room);
-//        AppUser user = appUserService.getCurrentUser();
-//        if (user == null) {
-//            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
-//        }
-//        Room room = new Room();
-//        return roomService.addRoom(user, room);
     }
 
 
